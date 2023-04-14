@@ -12,9 +12,9 @@ class Moodmodel extends Model
 
     public function getMood($slug = false)
     {
-        $user = auth()->user();
+        $user = auth()->user()->id;
         $db = db_connect();
-        $sql = "SELECT DISTINCT datum, mood, moodid, user, plek, beschrijving FROM mood ORDER BY datum ASC;";
+        $sql = "SELECT DISTINCT datum, mood, moodid, user, plek, beschrijving FROM mood WHERE user = $user ORDER BY datum ASC;";
 
         $selection = $db->query($sql, [$user]);
 
